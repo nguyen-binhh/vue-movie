@@ -1,30 +1,34 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="relative">
+    <div class="right border-b border-gray-600 w-full">
+      <Navbar />
+      <Search />
+    </div>
+    <router-view v-slot="slotProps">
+      <component :is="slotProps.Component"></component>
+    </router-view>
+    <div class="border-t border-gray-600 w-full">
+      <Footer />
+    </div>
+  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<script>
+import Navbar from "@/components/header/NavbarCpn.vue";
+import Search from "@/components/header/SearchCpn.vue";
+import Footer from "@/components/footer/FooterCpn.vue";
+export default {
+  components: {
+    Navbar,
+    Search,
+    Footer,
+  },
+};
+</script>
+<style lang="scss" scoped>
+.right {
+  display: flex;
+  gap: 0 20px;
+  padding: 20px;
 }
 </style>
